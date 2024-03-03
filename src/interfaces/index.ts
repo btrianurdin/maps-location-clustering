@@ -14,6 +14,15 @@ export interface IHotelData {
   thumbnail: string;
 }
 
+
+export interface IClusterLists {
+  is_cluster: boolean;
+  coordinates: [number, number];
+  cluster_id?: number;
+  point_count?: number;
+  price?: string;
+}
+
 export interface IGeoJsonFormat<T = any> {
   type: string;
   features: Array<IGeoJsonFeature<T>>;

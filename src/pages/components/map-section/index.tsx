@@ -29,8 +29,8 @@ const MapSection = () => {
           }}
         />
         <MapZoomControl
-          onZoom={(bound) => {
-            // console.log('zoom', bound);
+          onZoom={(bound, zoom) => {
+            console.log('zoom', bound, zoom);
           }}
         />
       </MapContainer>
