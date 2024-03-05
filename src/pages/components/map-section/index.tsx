@@ -68,6 +68,10 @@ const MapSection = (props: IMapSectionProps) => {
             <Marker
               key={cluster.cluster_id ?? idx}
               position={[cluster.coordinates[1], cluster.coordinates[0]]}
+              eventHandlers={{
+                click: () =>
+                  props.onClusterClick(cluster.is_cluster, cluster.cluster_id),
+              }}
               icon={L.divIcon({
                 html: renderToStaticMarkup(
                   <div

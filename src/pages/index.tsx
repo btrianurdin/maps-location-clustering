@@ -1,6 +1,7 @@
 import { IMapBounds } from "@/interfaces";
 import dynamic from "next/dynamic";
 import { useState } from "react";
+import ListsSection from "./components/lists-section";
 
 const MapSection = dynamic(() => import("./components/map-section"), {
   loading: () => <p>Loading...</p>,
@@ -25,6 +26,7 @@ export default function Home() {
         <h1 className="text-lg">Location Clustering</h1>
       </div>
       <div className="flex-grow flex h-full relative overflow-hidden">
+        <ListsSection activeClusterId={clusterId} bounds={bounds} />
         <MapSection
           bounds={bounds}
           acitveClusterId={clusterId}

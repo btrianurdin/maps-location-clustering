@@ -1,4 +1,7 @@
-import { IClusterRequestPayload } from "@/servers/interfaces";
+import {
+  IClusterRequestPayload,
+  ILocationsResponse,
+} from "@/servers/interfaces";
 import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { handle } from "hono/vercel";
@@ -102,6 +105,62 @@ app.post("/clusters", withBounds(), async (c) => {
     payload: {
       clusters,
       total: clusters.length,
+    },
+  });
+});
+
+app.post("/locations", withBounds(), async (c) => {
+  const { bounds, cluster_id, zoom_level } =
+    await c.req.json<IClusterRequestPayload>();
+
+  if (!zoom_level)
+    throw new HTTPException(400, {
+      message: "zoom_level is required",
+    });
+
+  const data = hotelsData as GeoJSON.FeatureCollection<
+    GeoJSON.Point,
+    IHotelData
+  >;
+
+  const { west, south, east, north } = readBounds(bounds);
+
+  const createCluster = new Supercluster<IHotelData>({
+    radius: 30,
+    maxZoom: 18,
+    minZoom: 5,
+  });
+  createCluster.load(data.features);
+
+  let locations = createCluster.getClusters(
+    [west, south, east, north],
+    zoom_level - 1.5
+  );
+
+  if (cluster_id) {
+    locations = createCluster.getLeaves(cluster_id, Infinity);
+  }
+
+  const resultLocations = locations
+    .filter((location) => !("cluster" in location.properties))
+    .map((location) => {
+      return {
+        location_id: location.properties.location_id,
+        name: location.properties.name,
+        rating: location.properties.rating,
+        price: location.properties.price,
+        thumbnail: location.properties.thumbnail,
+        url: location.properties.url,
+      };
+    });
+
+  await delay(500);
+
+  return c.json({
+    status: "success",
+    payload: {
+      locations: resultLocations,
+      total: locations.length,
     },
   });
 });
