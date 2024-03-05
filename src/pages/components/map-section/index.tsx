@@ -5,13 +5,14 @@ import { IClusterLists, IMapBounds } from "@/interfaces";
 import useGetClusters from "@/queries/use-get-clusters";
 import clsx from "clsx";
 import L from "leaflet";
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import { renderToStaticMarkup } from "react-dom/server";
 import MapFloatingSearching from "../map-floating-searching";
 
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
+import { useIsClient } from "usehooks-ts";
 
 interface IMapSectionProps {
   bounds: IMapBounds & { zoomLevel: number };
@@ -39,14 +40,24 @@ const MapSection = (props: IMapSectionProps) => {
     }
   }, [clustersQuery.data?.payload?.clusters, clustersQuery.isSuccess]);
 
+  const initialBounds = useMemo(() => {
+    if (props.bounds) {
+      return [
+        [props.bounds.northEast[0], props.bounds.northEast[1]],
+        [props.bounds.southWest[0], props.bounds.southWest[1]],
+      ];
+    }
+    return [
+      [-7.775670687112559, 110.3869331021706],
+      [-7.810068564955439, 110.33496262029804],
+    ];
+  }, [props.bounds]);
+
   return (
-    <div className="w-full h-full bg-gray-300">
+    <div className="relative w-full h-full bg-gray-300">
       <MapFloatingSearching loading={clustersQuery.isLoading} />
       <MapContainer
-        bounds={[
-          [-7.775670687112559, 110.3869331021706],
-          [-7.810068564955439, 110.33496262029804],
-        ]}
+        bounds={initialBounds as any}
         zoom={10}
         style={{
           height: "100%",

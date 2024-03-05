@@ -28,7 +28,10 @@ const ListsSection = (props: IListsSectionProps) => {
   }, [locationsQuery.data?.payload?.locations]);
 
   return (
-    <div ref={scrollRef} className="w-[35%] flex-shrink-0 h-full overflow-auto">
+    <div
+      ref={scrollRef}
+      className="w-full md:w-1/2 lg:w-[35%] flex-shrink-0 h-full overflow-auto"
+    >
       {locationsQuery.isLoading && <ListSkeleton />}
       {!locationsQuery.isLoading &&
         locations?.map((location) => (
