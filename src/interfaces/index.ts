@@ -14,7 +14,6 @@ export interface IHotelData {
   thumbnail: string;
 }
 
-
 export interface IClusterLists {
   is_cluster: boolean;
   coordinates: [number, number];
@@ -23,16 +22,8 @@ export interface IClusterLists {
   price?: string;
 }
 
-export interface IGeoJsonFormat<T = any> {
-  type: string;
-  features: Array<IGeoJsonFeature<T>>;
-}
-
-export interface IGeoJsonFeature<T> {
-  type: string;
-  properties: T;
-  geometry: {
-    type: string;
-    coordinates: [number, number];
-  };
+export interface IHttpResponse<T = any> {
+  status: "success" | "error";
+  message: string;
+  payload?: T;
 }

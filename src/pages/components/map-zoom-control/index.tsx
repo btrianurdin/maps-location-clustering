@@ -20,12 +20,6 @@ const MapZoomControl = ({ onZoom }: IZoomControlProps) => {
       const northEast = bounds.getNorthEast();
       const southWest = bounds.getSouthWest();
 
-      console.log({
-        northEast: [northEast.lat, northEast.lng],
-        southWest: [southWest.lat, southWest.lng],
-      });
-      console.log([bounds.getWest(), bounds.getSouth(), bounds.getEast(), bounds.getNorth()])
-
       onZoom(
         {
           northEast: [northEast.lat, northEast.lng],

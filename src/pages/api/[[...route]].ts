@@ -3,10 +3,11 @@ import { Hono } from "hono";
 import { HTTPException } from "hono/http-exception";
 import { handle } from "hono/vercel";
 import hotelsData from "@/data/id-hotels-geojson.json";
-import { IClusterLists, IGeoJsonFormat, IHotelData } from "@/interfaces";
+import { IClusterLists, IHotelData } from "@/interfaces";
 import withBounds from "@/servers/middleware/with-bounds";
 import readBounds from "@/utils/read-bounds";
 import Supercluster from "supercluster";
+import delay from "@/utils/delay";
 
 export const config = {
   runtime: "edge",
@@ -93,6 +94,8 @@ app.post("/clusters", withBounds(), async (c) => {
         price: cluster.properties.price,
       };
     });
+
+  await delay(500);
 
   return c.json({
     status: "success",
