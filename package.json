@@ -24,7 +24,8 @@
     "react-dom": "^18",
     "react-leaflet": "^4.2.1",
     "react-simple-star-rating": "^5.1.7",
-    "supercluster": "^8.0.1"
+    "supercluster": "^8.0.1",
+    "usehooks-ts": "^2.16.0"
   },
   "devDependencies": {
     "typescript": "^5",
