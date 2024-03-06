@@ -57,12 +57,11 @@ const MapSection = (props: IMapSectionProps) => {
       <MapFloatingSearching loading={clustersQuery.isLoading} />
       <MapContainer
         bounds={initialBounds as any}
-        zoom={10}
         style={{
           height: "100%",
           width: "100%",
         }}
-        minZoom={13}
+        minZoom={8}
         zoomControl={false}
         className="[&_.leaflet-attribution-flag]:!hidden"
       >
