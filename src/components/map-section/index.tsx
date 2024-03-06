@@ -12,7 +12,6 @@ import MapFloatingSearching from "../map-floating-searching";
 import "leaflet/dist/leaflet.css";
 import "leaflet-defaulticon-compatibility/dist/leaflet-defaulticon-compatibility.webpack.css"; // Re-uses images from ~leaflet package
 import "leaflet-defaulticon-compatibility";
-import { useIsClient } from "usehooks-ts";
 
 interface IMapSectionProps {
   bounds: IMapBounds & { zoomLevel: number };

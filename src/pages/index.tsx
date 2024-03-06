@@ -1,10 +1,10 @@
 import { IMapBounds } from "@/interfaces";
 import dynamic from "next/dynamic";
 import { useState } from "react";
-import ListsSection from "./components/lists-section";
+import ListsSection from "../components/lists-section";
 import { useWindowSize } from "usehooks-ts";
 
-const MapSection = dynamic(() => import("./components/map-section"), {
+const MapSection = dynamic(() => import("../components/map-section"), {
   ssr: false,
 });
 
@@ -54,14 +54,12 @@ export default function Home() {
           />
         )}
         <button
-          className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-blue-600 py-3 px-4 text-white flex items-center gap-1.5 rounded-full md:hidden z-[999] shadow-2xl"
+          className="absolute bottom-5 left-1/2 -translate-x-1/2 bg-blue-600 text-xs md:text-base py-2 px-3 md:py-3 md:px-4 text-white flex items-center gap-1.5 rounded-full md:hidden z-[999] shadow-2xl"
           onClick={() => setShowMapOnMobile((prev) => !prev)}
         >
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="icon icon-tabler icon-tabler-map"
-            width="24"
-            height="24"
+            className="icon icon-tabler icon-tabler-map md:w-6 md:h-6 w-5 h-5"
             viewBox="0 0 24 24"
             strokeWidth="1.5"
             stroke="currentColor"

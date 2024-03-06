@@ -4,7 +4,7 @@ const MapFloatingSearching = ({ loading }: { loading: boolean }) => {
   return (
     <div
       className={clsx(
-        "bg-white py-4 px-6 absolute top-5 rounded-full gap-2 text-base left-1/2 -translate-x-1/2 -translate-y-[200px] flex items-center justify-center z-[999]",
+        "bg-white py-3 px-5 md:py-4 md:px-6 absolute top-5 rounded-full gap-2 text-xs md:text-base left-1/2 -translate-x-1/2 -translate-y-[200px] flex items-center justify-center z-[999]",
         "transition-transform duration-300 ease-in-out",
         {
           "!translate-y-0": loading,
@@ -13,9 +13,7 @@ const MapFloatingSearching = ({ loading }: { loading: boolean }) => {
     >
       <svg
         xmlns="http://www.w3.org/2000/svg"
-        className="icon icon-tabler icon-tabler-loader animate-spin"
-        width="24"
-        height="24"
+        className="icon icon-tabler icon-tabler-loader animate-spin md:w-6 md:h-6 w-5 h-5"
         viewBox="0 0 24 24"
         strokeWidth="1.5"
         stroke="currentColor"
